@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.app_folder.R;
-import com.util.LocationServices;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
