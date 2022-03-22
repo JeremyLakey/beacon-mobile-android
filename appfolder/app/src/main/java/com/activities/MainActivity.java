@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
         }
         catch (Exception err) {
             System.out.println("Error but we cool\n");
@@ -34,5 +34,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void onLocationChanged(Location location) {
         TextView txtLat = (TextView) findViewById(R.id.test);
         txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+        //System.out.println("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+        //System.out.println("Bearing: " + location.getBearing() + "\n");
     }
 }

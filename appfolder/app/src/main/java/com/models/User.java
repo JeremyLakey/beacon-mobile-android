@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     public String userName;
     public String uniqueId;
+    public String imageUrl;
     public byte[] imageBytes;
     /*
         Longitude and Latitude for entire app/current user
@@ -24,6 +25,14 @@ public class User implements Serializable {
 
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public byte[] getImageBytes() {
