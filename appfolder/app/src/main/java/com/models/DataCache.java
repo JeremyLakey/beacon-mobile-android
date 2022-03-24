@@ -1,5 +1,8 @@
 package com.models;
 
+import com.util.FakeData;
+
+import java.util.List;
 import java.util.Vector;
 
 public class DataCache {
@@ -7,11 +10,19 @@ public class DataCache {
 
     public User user;
     public AuthToken authToken;
-    public Vector<Friend> friendList;
-    public Vector<Beacon> beaconList;
+    public LocationData locationData;
+    public List<Friend> friendList;
+    public List<Beacon> beaconList;
 
     private DataCache() {
-
+        FakeData fake = new FakeData();
+        this.user = new User("Jason Smith", "@jsmith",
+                "https://this-person-does-not-exist.com/img/avatar-8803d6bfbec2aec3dc09df371a4c25f3.jpg");
+        this.authToken = fake.getAuthToken();
+        this.locationData = fake.getStartLocationData();
+        this.friendList = fake.getFakeFriends();
+        this.beaconList = fake.getFakeBeacons();
+        System.out.println(toString());
     }
 
     static public DataCache getInstance() {
@@ -36,19 +47,34 @@ public class DataCache {
         this.authToken = authToken;
     }
 
-    public Vector<Friend> getFriendList() {
+    public List<Friend> getFriendList() {
         return friendList;
     }
 
-    public void setFriendList(Vector<Friend> friendList) {
+    public void setFriendList(List<Friend> friendList) {
         this.friendList = friendList;
     }
 
-    public Vector<Beacon> getBeaconList() {
+    public List<Beacon> getBeaconList() {
         return beaconList;
     }
 
-    public void setBeaconList(Vector<Beacon> beaconList) {
+    public void setBeaconList(List<Beacon> beaconList) {
         this.beaconList = beaconList;
+    }
+
+    public String toString() {
+        String output = "Current user: " + this.user.getUserName() + "\nFriend List\n" +
+                "Current Lat: " + this.locationData.getLatitude() + " Long: " + this.locationData.getLongitude()
+                +"\n";
+        for(Friend f : friendList) {
+            output += "Friend: " + f.getUserName() + "\n";
+        }
+        output += "Beacons\n";
+        for(Beacon b : beaconList) {
+            output += "Beacons: " + b.getTitle() + "Desc: " + b.getDescription()
+                    +  " Lat: " + b.getLatitude() + " Long: " +b.getLongitude() + "\n";
+        }
+        return output;
     }
 }

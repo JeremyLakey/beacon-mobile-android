@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.app_folder.R;
+import com.models.DataCache;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DataCache.getInstance();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);

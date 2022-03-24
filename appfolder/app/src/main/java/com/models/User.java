@@ -7,9 +7,12 @@ public class User implements Serializable {
     public String uniqueId;
     public String imageUrl;
     public byte[] imageBytes;
-    /*
-        Longitude and Latitude for entire app/current user
-     */
+
+    public User(String userName, String uniqueId, String imageUrl) {
+        this.userName = userName;
+        this.uniqueId = uniqueId;
+        this.imageUrl = imageUrl;
+    }
 
     public String getUserName() {
         return userName;
