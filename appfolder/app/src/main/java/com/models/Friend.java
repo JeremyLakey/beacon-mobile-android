@@ -5,8 +5,13 @@ import java.io.Serializable;
 public class Friend implements Serializable {
     public String userName;
     public String uniqueId;
+    public String imageUrl;
     public byte[] imageBytes;
 
+    public Friend(String userName, String uniqueId, String imageUrl) {
+        this.userName = userName;
+        this.uniqueId = uniqueId;
+    }
 
     public String getUserName() {
         return userName;
@@ -22,6 +27,14 @@ public class Friend implements Serializable {
 
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public byte[] getImageBytes() {

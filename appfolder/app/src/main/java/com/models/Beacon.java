@@ -2,15 +2,25 @@ package com.models;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Date;
 
 public class Beacon implements Serializable {
     public float longitude;
-    public float laditude;
+    public float latitude;
     public String title;
     public String description;
     public Friend owner;
-    public Time timeOut;
+    public Date timeOut;
     public byte[] imageBytes;
+
+    public Beacon(float latitude, float longitude,  String title, String description, Friend owner, Date timeOut) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.timeOut = timeOut;
+    }
 
     public float getLongitude() {
         return longitude;
@@ -20,12 +30,12 @@ public class Beacon implements Serializable {
         this.longitude = longitude;
     }
 
-    public float getLaditude() {
-        return laditude;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public void setLaditude(float laditude) {
-        this.laditude = laditude;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
     public String getTitle() {
@@ -52,11 +62,11 @@ public class Beacon implements Serializable {
         this.owner = owner;
     }
 
-    public Time getTimeOut() {
+    public Date getTimeOut() {
         return timeOut;
     }
 
-    public void setTimeOut(Time timeOut) {
+    public void setTimeOut(Date timeOut) {
         this.timeOut = timeOut;
     }
 }
