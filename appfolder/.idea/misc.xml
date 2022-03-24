@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_outline_svgrepo_com.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_map.xml" value="0.36685773840541946" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_radar.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>
