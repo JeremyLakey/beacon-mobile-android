@@ -16,57 +16,17 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha=".2">
+        >
+
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="107dp"
-            android:layout_height="108dp"
-            android:layout_gravity="center_horizontal |center_vertical"
-            android:src="@drawable/ic_circle_thin" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="265dp"
-            android:layout_height="216dp"
-            android:layout_gravity="center_horizontal |center_vertical"
-            android:src="@drawable/ic_circle_thin" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="411dp"
-            android:layout_height="338dp"
-            android:layout_gravity="center_horizontal |center_vertical"
-            android:src="@drawable/ic_circle_thin" />
-
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/radarPulse"
-            android:layout_width="256dp"
-            android:layout_height="224dp"
-            android:layout_centerInParent="true"
-            android:rotation="90"
-            android:src="@drawable/ic_rounded_line"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/radarSweeper"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal |center_vertical"
-            android:src="@drawable/ic_circle_thin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="372dp"
+            android:src="@drawable/ic_radar"
+            android:layout_gravity="center_vertical |center_horizontal"
+            android:tint="@color/radar"/>
+    </FrameLayout>
 
 
 </FrameLayout>

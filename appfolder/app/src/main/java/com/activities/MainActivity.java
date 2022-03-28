@@ -8,16 +8,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.app_folder.R;
 import com.fragments.MapFragment;
-import com.fragments.RadarFragment;
+import com.models.DataCache;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -39,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         //Initialize fragment
         Fragment fragment = new MapFragment();
-        ImageView asd = (ImageView)findViewById(R.id.circle);
 
         //Open fragment
         getSupportFragmentManager()
@@ -47,23 +42,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 .replace(R.id.frame_container, fragment)
                 .commit();
 
-
-        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        final Button button = findViewById(R.id.btn_test);
-        final ImageView img = findViewById(R.id.img_2);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // start the animation
-                img.startAnimation(animation);
-            }
-        });
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        TextView txtLat = (TextView) findViewById(R.id.test);
-        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+        //TextView txtLat = (TextView) findViewById(R.id.test);
+        //txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
         //System.out.println("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
         //System.out.println("Bearing: " + location.getBearing() + "\n");
     }
