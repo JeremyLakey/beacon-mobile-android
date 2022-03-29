@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_outline_svgrepo_com.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_thin.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_person_background.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_map.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_nav_bar.xml" value="0.16" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_radar.xml" value="0.1" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/mipmap-anydpi-v26/ic_person.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/mipmap-anydpi-v26/ic_person_round.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_outline_svgrepo_com.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_map.xml" value="0.36685773840541946" />
