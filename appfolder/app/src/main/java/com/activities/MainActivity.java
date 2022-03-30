@@ -1,7 +1,9 @@
 package com.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.location.Location;
@@ -13,12 +15,21 @@ import android.widget.TextView;
 
 import com.example.app_folder.R;
 import com.fragments.MapFragment;
+import com.fragments.NavBarFragment;
+import com.fragments.RadarFragment;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.models.DataCache;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     protected LocationManager locationManager;
-    protected LocationListener locationListener;
+    GoogleMap googleMap;
+    Marker currentLocationMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,29 +37,69 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         DataCache.getInstance();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         }
         catch (Exception err) {
             System.out.println("Error but we cool\n");
         }
         setContentView(R.layout.activity_main);
 
-        //Initialize fragment
+        //Initialize map fragment
         Fragment fragment = new MapFragment();
 
-        //Open fragment
-        getSupportFragmentManager()
+        //Initialize Nav Bar Fragment
+        Fragment navFragment = new NavBarFragment();
+
+
+        //Open map fragment
+        FragmentManager manager = getSupportFragmentManager();
+        manager
                 .beginTransaction()
                 .replace(R.id.frame_container, fragment)
                 .commit();
+        manager
+                .beginTransaction()
+                .replace(R.id.navBar_main_container, navFragment)
+                .commit();
 
+
+        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        //final Button button = findViewById(R.id.btn_test);
+        final ImageView img = findViewById(R.id.img_2);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // start the animation
+                img.startAnimation(animation);
+            }
+        });
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        //TextView txtLat = (TextView) findViewById(R.id.test);
-        //txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
-        //System.out.println("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
-        //System.out.println("Bearing: " + location.getBearing() + "\n");
+        DataCache cache = DataCache.getInstance();
+        cache.locationData.setLatitude((float)location.getLatitude());
+        cache.locationData.setLongitude((float)location.getLatitude());
+        cache.locationData.setDirection(location.getBearing());
+        if(this.googleMap == null) {
+            if(DataCache.getInstance().locationData.googleMap == null)
+                return;
+            this.googleMap = DataCache.getInstance().locationData.googleMap;
+        }
+        if(this.currentLocationMarker != null) {
+            currentLocationMarker.remove();
+        }
+        MarkerOptions markerOptions = new MarkerOptions();
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        markerOptions.position(latLng);
+        currentLocationMarker = googleMap.addMarker(markerOptions);
+
+        CameraPosition currentPlace = new CameraPosition.Builder()
+                .target(new LatLng(location.getLatitude(), location.getLongitude()))
+                .bearing(cache.locationData.direction).zoom(18f).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPlace));
     }
 }

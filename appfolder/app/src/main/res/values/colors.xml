@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="radar">#FF96f97b</color>
+    <color name="clear">#000000FF</color>
+    <color name="beacon_title_text_color">#FFFFFF</color>
+    <color name="nav_bar_background">#425fff</color>
+    <color name="friend_list_button_icon_color">#FFFFFF</color>
+    <color name="filter_button_icon_color">#FFFFFF</color>
 </resources>

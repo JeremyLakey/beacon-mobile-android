@@ -156,7 +156,9 @@ public class FakeData {
     }
 
     public float getRandomLocationValue() {
-        return random.nextFloat() / 20; // random in about a two mile radius
+        float modifier = 1;
+        if (random.nextInt(2) == 1) modifier = -1;
+        return random.nextFloat() / 20 * modifier; // random in about a two mile radius
     }
 
 

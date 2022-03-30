@@ -8,6 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
@@ -32,7 +35,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -44,6 +50,11 @@ import com.util.ByteArrayUtils;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import com.models.Beacon;
+import com.models.DataCache;
+
+import java.nio.channels.DatagramChannel;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,11 +63,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MapFragment extends Fragment {
 
+    protected LocationManager locationManager;
 
     ImageView radarPulse;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         //Initialize view
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
@@ -97,6 +111,17 @@ public class MapFragment extends Fragment {
 
                 googleMap.getUiSettings().setScrollGesturesEnabled(false);
                 //When map is loaded
+                DataCache cache = DataCache.getInstance();
+                cache.locationData.setGoogleMap(googleMap);
+                List<Beacon> beaconList = cache.getBeaconList();
+                for (Beacon beacon: beaconList) {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
+                    markerOptions.title(beacon.title);
+                    markerOptions.snippet(beacon.getDescription());
+                    googleMap.addMarker(markerOptions);
+                }
+
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
@@ -107,14 +132,9 @@ public class MapFragment extends Fragment {
                         markerOptions.position(latLng);
                         //Set title of marker
                         markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-                        //Remove all marker
-                        googleMap.clear();
-                        //Animating to zoom of marker
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                latLng, 10
-                        ));
+
+
                         //Add marker on Map
-                        googleMap.addMarker(markerOptions);
                     }
                 });
             }
@@ -123,6 +143,8 @@ public class MapFragment extends Fragment {
         //Return View
         return view;
     }
+
+
 
     private void rotate(ImageView view, Context context) {
 

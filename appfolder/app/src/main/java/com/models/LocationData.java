@@ -1,5 +1,7 @@
 package com.models;
 
+import com.google.android.gms.maps.GoogleMap;
+
 public class LocationData {
 
     public LocationData(float latitude, float longitude, float direction) {
@@ -11,6 +13,7 @@ public class LocationData {
     public float longitude;
     public float latitude;
     public float direction;
+    public GoogleMap googleMap;
 
     public float getLongitude() {
         return longitude;
@@ -34,5 +37,13 @@ public class LocationData {
 
     public void setDirection(float direction) {
         this.direction = direction;
+    }
+
+    public GoogleMap getGoogleMap() {
+        return googleMap;
+    }
+
+    public void setGoogleMap(GoogleMap googleMap) {
+        this.googleMap = googleMap;
     }
 }
