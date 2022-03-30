@@ -35,5 +35,4 @@
         app:srcCompat="@drawable/ic_circle_outline_svgrepo_com"
         android:paddingBottom="30dp"/>
 
-]]>
 </androidx.constraintlayout.widget.ConstraintLayout>
