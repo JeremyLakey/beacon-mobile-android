@@ -6,17 +6,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.app_folder.R;
 import com.fragments.MapFragment;
 import com.fragments.NavBarFragment;
-import com.fragments.RadarFragment;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -30,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected LocationManager locationManager;
     GoogleMap googleMap;
     Marker currentLocationMarker;
+    Button createBeaconButton;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +72,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
         //final Button button = findViewById(R.id.btn_test);
-        final ImageView img = findViewById(R.id.img_2);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // start the animation
-                img.startAnimation(animation);
-            }
-        });
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        //Create Beacon Code
+        createBeaconButton = findViewById(R.id.create_beacon_button);
+        if (DataCache.getInstance().getCurrUserBeacon() != null) {createBeaconButton.setVisibility(View.GONE);}
+        createBeaconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startCreateBeacon();
+            }
+        });
     }
 
     @Override
@@ -101,5 +111,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 .target(new LatLng(location.getLatitude(), location.getLongitude()))
                 .bearing(cache.locationData.direction).zoom(18f).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPlace));
+    }
+
+    public void startCreateBeacon() {
+        Intent intent = new Intent(this, CreateBeacon.class);
+        startActivity(intent);
     }
 }

@@ -13,4 +13,5 @@
     <color name="nav_bar_background">#425fff</color>
     <color name="friend_list_button_icon_color">#FFFFFF</color>
     <color name="filter_button_icon_color">#FFFFFF</color>
+    <color name="light_gray">#D3D3D3</color>
 </resources>

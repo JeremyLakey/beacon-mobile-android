@@ -13,6 +13,7 @@ public class DataCache {
     public LocationData locationData;
     public List<Friend> friendList;
     public List<Beacon> beaconList;
+    public Beacon currUserBeacon;
 
     private DataCache() {
         FakeData fake = new FakeData();
@@ -22,6 +23,7 @@ public class DataCache {
         this.locationData = fake.getStartLocationData();
         this.friendList = fake.getFakeFriends();
         this.beaconList = fake.getFakeBeacons();
+        currUserBeacon = null;
         System.out.println(toString());
     }
 
@@ -77,4 +79,7 @@ public class DataCache {
         }
         return output;
     }
+
+    public void setCurrUserBeacon(Beacon beacon) {this.currUserBeacon = beacon;}
+    public Beacon getCurrUserBeacon() {return this.currUserBeacon;}
 }

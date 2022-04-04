@@ -3,10 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/circular.xml" value="0.3828125" />
-        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/david_arcifa_bg.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_outline_svgrepo_com.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_thin.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_person_background.xml" value="0.14270833333333333" />
@@ -16,6 +12,9 @@
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_radar.xml" value="0.1" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/mipmap-anydpi-v26/ic_person.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/mipmap-anydpi-v26/ic_person_round.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/circular.xml" value="0.3828125" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/david_arcifa_bg.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_outline_svgrepo_com.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_thin.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_ellipse_1.xml" value="0.3828125" />
@@ -24,10 +23,12 @@
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_rounded_line.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/image.xml" value="0.3828125" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/drawable/person_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_create_beacon.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/custom_marker_layout.xml" value="0.8795731707317073" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_map.xml" value="0.25" />
         <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_radar.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/rando/cs256/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_time_picker.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
