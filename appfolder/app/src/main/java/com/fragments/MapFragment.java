@@ -99,9 +99,14 @@ public class MapFragment extends Fragment {
                 ));
 
 
-                googleMap.addMarker(new MarkerOptions().position(currLocation).
+                /*googleMap.addMarker(new MarkerOptions().position(currLocation).
                         icon(BitmapDescriptorFactory.fromBitmap(
-                                createCustomMarker(getActivity(), R.drawable.generatedperson,"Manish")))).setTitle("I'm at the Marb for 30 minutes!");
+                                createCustomMarker(getActivity(), R.drawable.generatedperson,"Manish")))).setTitle("I'm at the Marb for 30 minutes!");*/
+
+                if (dataCache.getCurrUserBeacon() != null) {
+                    googleMap.addMarker(beaconToMarkerOptions(dataCache.getCurrUserBeacon()).icon(BitmapDescriptorFactory.fromBitmap(
+                            createCustomMarker(getActivity(), R.drawable.generatedperson,"Manish"))));
+                }
 
 
                 /*MarkerOptions imageMarker = new MarkerOptions();
@@ -142,6 +147,14 @@ public class MapFragment extends Fragment {
 
         //Return View
         return view;
+    }
+
+    private MarkerOptions beaconToMarkerOptions(Beacon beacon) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
+        markerOptions.title(beacon.title);
+        markerOptions.snippet(beacon.getDescription());
+        return markerOptions;
     }
 
 
