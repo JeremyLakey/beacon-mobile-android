@@ -17,6 +17,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -64,6 +65,7 @@ import java.util.List;
 public class MapFragment extends Fragment {
 
     protected LocationManager locationManager;
+    protected CurrentBeaconFragment currentBeaconFragment;
 
     ImageView radarPulse;
     @Override
@@ -86,7 +88,7 @@ public class MapFragment extends Fragment {
         LatLng currLocation = new LatLng(dataCache.locationData.getLatitude(), dataCache.locationData.getLongitude());
 
 
-
+        this.currentBeaconFragment = new CurrentBeaconFragment();
 
         //Async map
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -124,12 +126,32 @@ public class MapFragment extends Fragment {
                     markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
                     markerOptions.title(beacon.title);
                     markerOptions.snippet(beacon.getDescription());
-                    googleMap.addMarker(markerOptions);
+                    Marker marker = googleMap.addMarker(markerOptions);
+                    beacon.setMarkerId(marker.getId());
                 }
+
+                googleMap.setOnMarkerClickListener(
+                        new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Beacon target = getBeaconFromMarker(marker);
+                                if (target == null) {
+                                    return false;
+                                }
+                                DataCache.getInstance().currentBeacon = target;
+                                FragmentManager manager = getActivity().getSupportFragmentManager();
+                                manager.beginTransaction().replace(R.id.navBar_current_beacon_container, currentBeaconFragment).commit();
+                                return false;
+                            }
+                        }
+                );
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
+                        FragmentManager manager = getActivity().getSupportFragmentManager();
+
+                        manager.beginTransaction().remove(currentBeaconFragment).commit();
                         //when clicked on map
                         //Initialize marker options
                         MarkerOptions markerOptions = new MarkerOptions();
@@ -247,5 +269,15 @@ public class MapFragment extends Fragment {
         marker.draw(canvas);
 
         return bitmap;
+    }
+
+    public Beacon getBeaconFromMarker(Marker marker) {
+        List<Beacon> beaconList = DataCache.getInstance().getBeaconList();
+        for (Beacon beacon: beaconList) {
+            if (beacon.getMarkerId().equals(marker.getId())) {
+                return beacon;
+            }
+        }
+        return null;
     }
 }

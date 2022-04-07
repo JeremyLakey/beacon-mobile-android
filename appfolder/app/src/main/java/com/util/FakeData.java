@@ -20,8 +20,8 @@ import java.util.Vector;
 
 public class FakeData {
     //Marb 40.2468, -111.6490
-    private static float LAT_BASE = 40.2468f;
-    private static float LONG_BASE = -111.6490f;
+    private static float LAT_BASE = 40.281820f; // 40.2468f
+    private static float LONG_BASE = -111.664929f; // -111.6490f
 
     private static Random random = new Random();
     /**
@@ -122,6 +122,7 @@ public class FakeData {
                 Friend sender = fakeFriends.get(j);
                 String post = getRandomPost();
                 Date countDown = calendar.getTime();
+                countDown.setTime(countDown.getTime() + getRandomTime());
                 Beacon beacon = new Beacon((float)latitude,(float)longitude,sender.getUserName(),post,
                         sender,countDown);
                 allBeacons.add(beacon);
@@ -158,7 +159,11 @@ public class FakeData {
     public float getRandomLocationValue() {
         float modifier = 1;
         if (random.nextInt(2) == 1) modifier = -1;
-        return random.nextFloat() / 20 * modifier; // random in about a two mile radius
+        return random.nextFloat() / 1000 * modifier; // random in about a two mile radius
+    }
+
+    public long getRandomTime() {
+        return ((long)(random.nextFloat() * 100)) * 1000 + 10000;
     }
 
 

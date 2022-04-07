@@ -14,6 +14,7 @@ public class DataCache {
     public List<Friend> friendList;
     public List<Beacon> beaconList;
     public Beacon currUserBeacon;
+    public Beacon currentBeacon;        // This is the currently selected beacon.
 
     private DataCache() {
         FakeData fake = new FakeData();
@@ -24,6 +25,7 @@ public class DataCache {
         this.friendList = fake.getFakeFriends();
         this.beaconList = fake.getFakeBeacons();
         currUserBeacon = null;
+        currentBeacon = null;
         System.out.println(toString());
     }
 
@@ -82,4 +84,20 @@ public class DataCache {
 
     public void setCurrUserBeacon(Beacon beacon) {this.currUserBeacon = beacon;}
     public Beacon getCurrUserBeacon() {return this.currUserBeacon;}
+
+    public LocationData getLocationData() {
+        return locationData;
+    }
+
+    public void setLocationData(LocationData locationData) {
+        this.locationData = locationData;
+    }
+
+    public Beacon getCurrentBeacon() {
+        return currentBeacon;
+    }
+
+    public void setCurrentBeacon(Beacon currentBeacon) {
+        this.currentBeacon = currentBeacon;
+    }
 }
