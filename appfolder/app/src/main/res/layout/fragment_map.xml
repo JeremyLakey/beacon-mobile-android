@@ -25,7 +25,7 @@
             android:layout_height="372dp"
             android:src="@drawable/ic_radar"
             android:layout_gravity="center_vertical |center_horizontal"
-            android:tint="@color/radar"/>
+            android:tint="@color/blue_light"/>
     </FrameLayout>
 
 

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="50dp"
         android:layout_height="59dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/blue_medium"
         android:background="@drawable/ic_marker_shape">
         <TextView android:text="janet John"
             android:layout_width="match_parent"
