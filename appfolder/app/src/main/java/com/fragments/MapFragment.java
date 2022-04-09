@@ -95,7 +95,7 @@ public class MapFragment extends Fragment {
                 googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity().getApplicationContext(), R.raw.style_json));
 
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        currLocation, 18
+                        currLocation, 14
                 ));
 
 

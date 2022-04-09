@@ -14,4 +14,9 @@
     <color name="friend_list_button_icon_color">#FFFFFF</color>
     <color name="filter_button_icon_color">#FFFFFF</color>
     <color name="light_gray">#D3D3D3</color>
+    <color name="blue_medium">#415A77</color>
+    <color name="blue_light">#778DA9</color>
+    <color name="blue_dark">#1B263B</color>
+    <color name="blue_darker">#1B263B</color>
+    <color name="gray_medium">#E0E1DD</color>
 </resources>
