@@ -37,7 +37,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#E0E1DD"
+        "color": "#1B263B"
       }
     ]
   },
@@ -46,7 +46,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#E0E1DD"
+        "color": "#1B263B"
       }
     ]
   },
@@ -55,7 +55,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#E0E1DD"
+        "color": "#1B263B"
       }
     ]
   },
@@ -73,7 +73,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#E0E1DD"
+        "color": "#1B263B"
       }
     ]
   },
