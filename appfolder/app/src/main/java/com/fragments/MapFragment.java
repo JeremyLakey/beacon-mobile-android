@@ -28,6 +28,8 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,6 +70,7 @@ public class MapFragment extends Fragment {
     protected CurrentBeaconFragment currentBeaconFragment;
 
     ImageView radarPulse;
+    Button button;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +84,8 @@ public class MapFragment extends Fragment {
                 getChildFragmentManager().findFragmentById(R.id.google_map);
 
         radarPulse = view.findViewById(R.id.radarSweeper);
-        rotate(radarPulse, getActivity().getApplicationContext());
+        radarPulse.setVisibility(View.INVISIBLE);
+        button = view.findViewById(R.id.create_beacon_button);
 
         DataCache dataCache = DataCache.getInstance();
         User user = dataCache.getUser();
@@ -160,6 +164,14 @@ public class MapFragment extends Fragment {
 
 
                         //Add marker on Map
+                    }
+                });
+                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+
+                        radarPulse.setVisibility(View.VISIBLE);
+                        rotate(radarPulse, getActivity().getApplicationContext());
                     }
                 });
             }
