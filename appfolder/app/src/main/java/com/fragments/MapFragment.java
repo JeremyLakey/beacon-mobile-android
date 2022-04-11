@@ -167,7 +167,15 @@ public class MapFragment extends Fragment {
                             }
                         }
                 );
-
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(@NonNull LatLng latLng) {
+                        if (currentBeaconFragment != null) {
+                            FragmentManager manager = getActivity().getSupportFragmentManager();
+                            manager.beginTransaction().remove(currentBeaconFragment).commit();
+                        }
+                    }
+                });
                 googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override
                     public void onMapLoaded() {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,9 @@ public class CurrentBeaconFragment extends Fragment {
         titleText.setText(currentBeacon.description);
         TextView nameText = view.findViewById(R.id.beacon_user_name);
         nameText.setText(currentBeacon.owner.userName);
+        ImageView imageView = view.findViewById(R.id.current_beacon_image);
+        if (imageView != null && currentBeacon.owner != null)
+            imageView.setImageResource(currentBeacon.owner.image);
 
 
         if(currentBeacon.stillTime())
