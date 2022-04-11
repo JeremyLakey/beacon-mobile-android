@@ -21,8 +21,8 @@ import java.util.Vector;
 
 public class FakeData {
     //Marb 40.2468, -111.6490
-    private static float LAT_BASE = 40.281820f; // 40.2468f
-    private static float LONG_BASE = -111.664929f; // -111.6490f
+    private static float LAT_BASE = 40.2468f;
+    private static float LONG_BASE = -111.6490f;
 
     private static Random random = new Random();
     /**

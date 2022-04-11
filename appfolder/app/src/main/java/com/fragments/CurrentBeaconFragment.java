@@ -40,9 +40,9 @@ public class CurrentBeaconFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_select_beacon, container, false);
         this.textView = view.findViewById(R.id.beacon_count_down);
         TextView titleText = view.findViewById(R.id.beacon_title);
-        titleText.setText(currentBeacon.title);
-        TextView descText = view.findViewById(R.id.beacon_desc);
         titleText.setText(currentBeacon.description);
+        //TextView descText = view.findViewById(R.id.beacon_desc);
+        //titleText.setText(currentBeacon.description);
         TextView nameText = view.findViewById(R.id.beacon_user_name);
         nameText.setText(currentBeacon.owner.userName);
         ImageView imageView = view.findViewById(R.id.current_beacon_image);

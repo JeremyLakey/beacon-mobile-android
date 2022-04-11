@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void onLocationChanged(Location location) {
         DataCache cache = DataCache.getInstance();
         cache.locationData.setLatitude((float)location.getLatitude());
-        cache.locationData.setLongitude((float)location.getLatitude());
+        cache.locationData.setLongitude((float)location.getLongitude());
         cache.locationData.setDirection(location.getBearing());
         if(this.googleMap == null) {
             if(DataCache.getInstance().locationData.googleMap == null)
