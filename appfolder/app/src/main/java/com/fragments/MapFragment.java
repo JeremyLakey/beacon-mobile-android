@@ -203,7 +203,6 @@ public class MapFragment extends Fragment {
                         //Add marker on Map
                     }
                 });*/
-                });
                 googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override
                     public void onMapLoaded() {

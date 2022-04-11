@@ -11,7 +11,9 @@
         android:layout_height="78.2dp"
         android:backgroundTint="#86ac66"
         android:background="@drawable/ic_new_map_pin">
-        <TextView android:text="janet John"
+        <TextView
+            android:id="@+id/name"
+            android:text="janet John"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -20,7 +22,6 @@
             android:alpha="0.8"
             android:background="@drawable/ic_radar"
             android:gravity="center"
-            android:text="janet John"
             android:textColor="#000"
             android:textSize="7sp"
             android:visibility="gone" />
