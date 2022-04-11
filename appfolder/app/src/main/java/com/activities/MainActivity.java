@@ -28,7 +28,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.models.Beacon;
 import com.models.DataCache;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         DataCache.getInstance();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 0, this);
         }
         catch (Exception err) {
             System.out.println("Error but we cool\n");
@@ -102,19 +105,43 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if(this.currentLocationMarker != null) {
             currentLocationMarker.remove();
         }
-        MarkerOptions markerOptions = new MarkerOptions();
+        updateBeacons();
+        //MarkerOptions markerOptions = new MarkerOptions();
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        markerOptions.position(latLng);
-        currentLocationMarker = googleMap.addMarker(markerOptions);
+        //markerOptions.position(latLng);
+        //currentLocationMarker = googleMap.addMarker(markerOptions);
 
         CameraPosition currentPlace = new CameraPosition.Builder()
                 .target(new LatLng(location.getLatitude(), location.getLongitude()))
-                .bearing(cache.locationData.direction).zoom(18f).build();
+                .bearing(cache.locationData.direction)
+                .zoom(DataCache.getInstance().locationData.zoom)
+                .build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPlace));
+
     }
 
     public void startCreateBeacon() {
         Intent intent = new Intent(this, CreateBeacon.class);
         startActivity(intent);
+    }
+
+    private void updateBeacons() {
+        if (googleMap == null)
+        {
+            googleMap = DataCache.getInstance().getLocationData().googleMap;
+            return;
+        }
+        googleMap.clear();
+        List<Beacon> beaconList = DataCache.getInstance().getBeaconList();
+        for (Beacon beacon: beaconList) {
+            if(!beacon.validateBeacon())
+                continue;
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
+            //markerOptions.title(beacon.title);
+            //markerOptions.snippet(beacon.getDescription());
+            Marker marker = googleMap.addMarker(markerOptions);
+            beacon.setMarkerId(marker.getId());
+        }
     }
 }

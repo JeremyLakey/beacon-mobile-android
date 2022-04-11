@@ -88,14 +88,15 @@ public class MapFragment extends Fragment {
         LatLng currLocation = new LatLng(dataCache.locationData.getLatitude(), dataCache.locationData.getLongitude());
 
 
-        this.currentBeaconFragment = new CurrentBeaconFragment();
-
         //Async map
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity().getApplicationContext(), R.raw.style_json));
-
+                googleMap.getUiSettings().setScrollGesturesEnabled(false);
+                googleMap.getUiSettings().setRotateGesturesEnabled(false);
+                googleMap.getUiSettings().setZoomControlsEnabled(false);
+                googleMap.getUiSettings().setZoomGesturesEnabled(false);
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                         currLocation, 14
                 ));
@@ -120,15 +121,7 @@ public class MapFragment extends Fragment {
                 //When map is loaded
                 DataCache cache = DataCache.getInstance();
                 cache.locationData.setGoogleMap(googleMap);
-                List<Beacon> beaconList = cache.getBeaconList();
-                for (Beacon beacon: beaconList) {
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
-                    markerOptions.title(beacon.title);
-                    markerOptions.snippet(beacon.getDescription());
-                    Marker marker = googleMap.addMarker(markerOptions);
-                    beacon.setMarkerId(marker.getId());
-                }
+
 
                 googleMap.setOnMarkerClickListener(
                         new GoogleMap.OnMarkerClickListener() {
@@ -136,12 +129,17 @@ public class MapFragment extends Fragment {
                             public boolean onMarkerClick(@NonNull Marker marker) {
                                 Beacon target = getBeaconFromMarker(marker);
                                 if (target == null) {
-                                    return false;
+                                    return true;
                                 }
                                 DataCache.getInstance().currentBeacon = target;
                                 FragmentManager manager = getActivity().getSupportFragmentManager();
-                                manager.beginTransaction().replace(R.id.navBar_current_beacon_container, currentBeaconFragment).commit();
-                                return false;
+                                if (currentBeaconFragment != null) {
+                                    manager.beginTransaction().remove(currentBeaconFragment).commit();
+                                }
+                                currentBeaconFragment = new CurrentBeaconFragment();
+                                manager.beginTransaction().add(R.id.navBar_current_beacon_container, currentBeaconFragment)
+                                        .commit();
+                                return true;    // true means the camera doesn't move. Which is what we always want.
                             }
                         }
                 );

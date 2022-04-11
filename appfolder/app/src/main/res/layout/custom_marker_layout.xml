@@ -8,21 +8,23 @@
     <RelativeLayout
         android:layout_width="50dp"
         android:layout_height="59dp"
-        android:backgroundTint="@color/blue_medium"
-        android:background="@drawable/ic_marker_shape">
-        <TextView android:text="janet John"
+        android:background="@drawable/ic_marker_shape"
+        android:backgroundTint="@color/blue_medium">
+
+        <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="7sp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:textColor="#000"
             android:alpha="0.8"
             android:background="@drawable/ic_radar"
-            android:id="@+id/name"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:visibility="gone"/>
+            android:gravity="center"
+            android:text="janet John"
+            android:textColor="#000"
+            android:textSize="7sp"
+            android:visibility="gone" />
     </RelativeLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_dp"
