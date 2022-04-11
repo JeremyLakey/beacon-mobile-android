@@ -116,7 +116,6 @@ public class FakeData {
         Calendar calendar = new GregorianCalendar();
         List<Friend> fakeFriends = getFakeFriends();
 
-        for (int i = 0; i < 2; ++i) {
             for (int j = 0; j < fakeFriends.size(); ++j) {
                 float latitude = LAT_BASE + getRandomLocationValue();
                 float longitude = LONG_BASE + getRandomLocationValue();
@@ -128,7 +127,6 @@ public class FakeData {
                         sender,countDown);
                 allBeacons.add(beacon);
             }
-        }
     }
 
     public AuthToken getAuthToken() {
@@ -160,7 +158,7 @@ public class FakeData {
     public float getRandomLocationValue() {
         float modifier = 1;
         if (random.nextInt(2) == 1) modifier = -1;
-        return random.nextFloat() / 1000 * modifier; // random in about a two mile radius
+        return random.nextFloat() / 20 * modifier; // random in about a two mile radius
     }
 
     public long getRandomTime() {

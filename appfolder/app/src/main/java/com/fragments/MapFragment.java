@@ -131,8 +131,8 @@ public class MapFragment extends Fragment {
 
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(googleMap.getCameraPosition().target, (progress/10)+10));
-
+                        Beacon.maxRange = (progress + 1) * 100;
+                        DataCache.getInstance().locationData.zoom = (progress/10) + 10;
                     }
                 });
 
@@ -146,16 +146,6 @@ public class MapFragment extends Fragment {
                 //When map is loaded
                 DataCache cache = DataCache.getInstance();
                 cache.locationData.setGoogleMap(googleMap);
-                List<Beacon> beaconList = cache.getBeaconList();
-                for (Beacon beacon: beaconList) {
-                    /*MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
-                    markerOptions.title(beacon.title);
-                    markerOptions.snippet(beacon.getDescription());
-                    Marker marker = googleMap.addMarker(markerOptions);
-                    beacon.setMarkerId(marker.getId());
-                }
-
 
                 googleMap.setOnMarkerClickListener(
                         new GoogleMap.OnMarkerClickListener() {
@@ -178,31 +168,6 @@ public class MapFragment extends Fragment {
                         }
                 );
 
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    googleMap.addMarker(markerOptions);*/
-
-                    googleMap.addMarker(beaconToMarkerOptions(beacon).icon(BitmapDescriptorFactory.fromBitmap(
-                            createCustomMarker(getActivity(), beacon.owner.getImageUrl(),"Manish"))));
-                }
-
-                /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull LatLng latLng) {
-                        FragmentManager manager = getActivity().getSupportFragmentManager();
-
-                        manager.beginTransaction().remove(currentBeaconFragment).commit();
-                        //when clicked on map
-                        //Initialize marker options
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        //Set position of marker
-                        markerOptions.position(latLng);
-                        //Set title of marker
-                        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-
-
-                        //Add marker on Map
-                    }
-                });*/
                 googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override
                     public void onMapLoaded() {
@@ -218,13 +183,7 @@ public class MapFragment extends Fragment {
         return view;
     }
 
-    private MarkerOptions beaconToMarkerOptions(Beacon beacon) {
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
-        markerOptions.title(beacon.title);
-        markerOptions.snippet(beacon.getDescription());
-        return markerOptions;
-    }
+
 
 
 
@@ -296,6 +255,26 @@ public class MapFragment extends Fragment {
         return BitmapDescriptorFactory.fromBitmap(bmp);
     }
 
+
+
+    public Beacon getBeaconFromMarker(Marker marker) {
+        List<Beacon> beaconList = DataCache.getInstance().getBeaconList();
+        for (Beacon beacon: beaconList) {
+            if (beacon.getMarkerId().equals(marker.getId())) {
+                return beacon;
+            }
+        }
+        return null;
+    }
+
+    private MarkerOptions beaconToMarkerOptions(Beacon beacon) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
+        markerOptions.title(beacon.title);
+        markerOptions.snippet(beacon.getDescription());
+        return markerOptions;
+    }
+
     public static Bitmap createCustomMarker(Context context, @DrawableRes int resource, String _name) {
 
         View marker = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
@@ -316,15 +295,5 @@ public class MapFragment extends Fragment {
         marker.draw(canvas);
 
         return bitmap;
-    }
-
-    public Beacon getBeaconFromMarker(Marker marker) {
-        List<Beacon> beaconList = DataCache.getInstance().getBeaconList();
-        for (Beacon beacon: beaconList) {
-            if (beacon.getMarkerId().equals(marker.getId())) {
-                return beacon;
-            }
-        }
-        return null;
     }
 }

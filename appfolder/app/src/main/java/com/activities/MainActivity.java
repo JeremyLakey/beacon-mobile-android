@@ -1,17 +1,24 @@
 package com.activities;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -24,6 +31,7 @@ import com.fragments.NavBarFragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -32,6 +40,8 @@ import com.models.Beacon;
 import com.models.DataCache;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -90,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
     }
-
+    // TODO: move this to the map Fragment. Because design principles
     @Override
     public void onLocationChanged(Location location) {
         DataCache cache = DataCache.getInstance();
@@ -136,12 +146,39 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         for (Beacon beacon: beaconList) {
             if(!beacon.validateBeacon())
                 continue;
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
-            //markerOptions.title(beacon.title);
-            //markerOptions.snippet(beacon.getDescription());
-            Marker marker = googleMap.addMarker(markerOptions);
+            Marker marker = googleMap.addMarker(beaconToMarkerOptions(beacon).icon(BitmapDescriptorFactory.fromBitmap(
+                    createCustomMarker(this, beacon.owner.getImageUrl(),"Manish"))));
             beacon.setMarkerId(marker.getId());
         }
+    }
+
+    private MarkerOptions beaconToMarkerOptions(Beacon beacon) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
+        markerOptions.title(beacon.title);
+        markerOptions.snippet(beacon.getDescription());
+        return markerOptions;
+    }
+
+    public static Bitmap createCustomMarker(Context context, @DrawableRes int resource, String _name) {
+
+        View marker = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
+
+        CircleImageView markerImage = (CircleImageView) marker.findViewById(R.id.user_dp);
+        markerImage.setImageResource(resource);
+        TextView txt_name = (TextView)marker.findViewById(R.id.name);
+        txt_name.setText(_name);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        marker.setLayoutParams(new ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT));
+        marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        marker.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(marker.getMeasuredWidth(), marker.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        marker.draw(canvas);
+
+        return bitmap;
     }
 }
