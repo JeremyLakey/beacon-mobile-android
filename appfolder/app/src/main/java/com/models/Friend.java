@@ -5,12 +5,13 @@ import java.io.Serializable;
 public class Friend implements Serializable {
     public String userName;
     public String uniqueId;
-    public String imageUrl;
+    public int image;
     public byte[] imageBytes;
 
-    public Friend(String userName, String uniqueId, String imageUrl) {
+    public Friend(String userName, String uniqueId, int image) {
         this.userName = userName;
         this.uniqueId = uniqueId;
+        this.image = image;
     }
 
     public String getUserName() {
@@ -29,12 +30,12 @@ public class Friend implements Serializable {
         this.uniqueId = uniqueId;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public int getImageUrl() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public byte[] getImageBytes() {

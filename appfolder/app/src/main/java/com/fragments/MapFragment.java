@@ -29,6 +29,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.app_folder.R;
@@ -68,6 +69,7 @@ public class MapFragment extends Fragment {
     protected CurrentBeaconFragment currentBeaconFragment;
 
     ImageView radarPulse;
+    SeekBar distance;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class MapFragment extends Fragment {
                 getChildFragmentManager().findFragmentById(R.id.google_map);
 
         radarPulse = view.findViewById(R.id.radarSweeper);
+        distance = view.findViewById(R.id.distance);
         rotate(radarPulse, getActivity().getApplicationContext());
 
         DataCache dataCache = DataCache.getInstance();
@@ -97,7 +100,7 @@ public class MapFragment extends Fragment {
                 googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity().getApplicationContext(), R.raw.style_json));
 
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        currLocation, 14
+                        currLocation, ((distance.getProgress()/10)+10)
                 ));
 
 
@@ -109,6 +112,23 @@ public class MapFragment extends Fragment {
                     googleMap.addMarker(beaconToMarkerOptions(dataCache.getCurrUserBeacon()).icon(BitmapDescriptorFactory.fromBitmap(
                             createCustomMarker(getActivity(), R.drawable.generatedperson,"Manish"))));
                 }
+                distance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(googleMap.getCameraPosition().target, (progress/10)+10));
+
+                    }
+                });
 
 
                 /*MarkerOptions imageMarker = new MarkerOptions();
@@ -122,7 +142,7 @@ public class MapFragment extends Fragment {
                 cache.locationData.setGoogleMap(googleMap);
                 List<Beacon> beaconList = cache.getBeaconList();
                 for (Beacon beacon: beaconList) {
-                    MarkerOptions markerOptions = new MarkerOptions();
+                    /*MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(new LatLng(beacon.latitude, beacon.longitude));
                     markerOptions.title(beacon.title);
                     markerOptions.snippet(beacon.getDescription());
@@ -147,6 +167,13 @@ public class MapFragment extends Fragment {
                 );
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    googleMap.addMarker(markerOptions);*/
+
+                    googleMap.addMarker(beaconToMarkerOptions(beacon).icon(BitmapDescriptorFactory.fromBitmap(
+                            createCustomMarker(getActivity(), beacon.owner.getImageUrl(),"Manish"))));
+                }
+
+                /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
                         FragmentManager manager = getActivity().getSupportFragmentManager();
@@ -163,7 +190,7 @@ public class MapFragment extends Fragment {
 
                         //Add marker on Map
                     }
-                });
+                });*/
             }
         });
 

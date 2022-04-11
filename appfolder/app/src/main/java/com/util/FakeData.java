@@ -1,5 +1,6 @@
 package com.util;
 
+import com.example.app_folder.R;
 import com.models.Friend;
 import com.models.AuthToken;
 import com.models.Beacon;
@@ -33,27 +34,27 @@ public class FakeData {
     /**
      * Generated users.
      */
-    private static final Friend user1 = new Friend("Allen Anderson", "@allen", MALE_IMAGE_URL);
-    private static final Friend user2 = new Friend("Amy Ames", "@amy", FEMALE_IMAGE_URL);
-    private static final Friend user3 = new Friend("Bob Bobson", "@bob", MALE_IMAGE_URL);
-    private static final Friend user4 = new Friend("Bonnie Beatty", "@bonnie", FEMALE_IMAGE_URL);
-    private static final Friend user5 = new Friend("Chris Colston", "@chris", MALE_IMAGE_URL);
-    private static final Friend user6 = new Friend("Cindy Coats", "@cindy", FEMALE_IMAGE_URL);
-    private static final Friend user7 = new Friend("Dan Donaldson", "@dan", MALE_IMAGE_URL);
-    private static final Friend user8 = new Friend("Dee Dempsey", "@dee", FEMALE_IMAGE_URL);
-    private static final Friend user9 = new Friend("Elliott Enderson", "@elliott", MALE_IMAGE_URL);
-    private static final Friend user10 = new Friend("Elizabeth Engle", "@elizabeth", FEMALE_IMAGE_URL);
-    private static final Friend user11 = new Friend("Frank Frandson", "@frank", MALE_IMAGE_URL);
-    private static final Friend user12 = new Friend("Fran Franklin", "@fran", FEMALE_IMAGE_URL);
-    private static final Friend user13 = new Friend("Gary Gilbert", "@gary", MALE_IMAGE_URL);
-    private static final Friend user14 = new Friend("Giovanna Giles", "@giovanna", FEMALE_IMAGE_URL);
-    private static final Friend user15 = new Friend("Henry Henderson", "@henry", MALE_IMAGE_URL);
-    private static final Friend user16 = new Friend("Helen Hopwell", "@helen", FEMALE_IMAGE_URL);
-    private static final Friend user17 = new Friend("Igor Isaacson", "@igor", MALE_IMAGE_URL);
-    private static final Friend user18 = new Friend("Isabel Isaacson", "@isabel", FEMALE_IMAGE_URL);
-    private static final Friend user19 = new Friend("Justin Jones", "@justin", MALE_IMAGE_URL);
-    private static final Friend user20 = new Friend("Jill Johnson", "@jill", FEMALE_IMAGE_URL);
-    private static final Friend user21 = new Friend("John Brown", "@john", MALE_IMAGE_URL);
+    private static final Friend user1 = new Friend("Allen Anderson", "@allen", R.drawable.man_1);
+    private static final Friend user2 = new Friend("Amy Ames", "@amy", R.drawable.w_1);
+    private static final Friend user3 = new Friend("Bob Bobson", "@bob", R.drawable.man_2);
+    private static final Friend user4 = new Friend("Bonnie Beatty", "@bonnie", R.drawable.w_2);
+    private static final Friend user5 = new Friend("Chris Colston", "@chris", R.drawable.man_3);
+    private static final Friend user6 = new Friend("Cindy Coats", "@cindy", R.drawable.w_3);
+    private static final Friend user7 = new Friend("Dan Donaldson", "@dan", R.drawable.man_4);
+    private static final Friend user8 = new Friend("Dee Dempsey", "@dee", R.drawable.w_4);
+    private static final Friend user9 = new Friend("Elliott Enderson", "@elliott", R.drawable.man_5);
+    private static final Friend user10 = new Friend("Elizabeth Engle", "@elizabeth", R.drawable.w_5);
+    private static final Friend user11 = new Friend("Frank Frandson", "@frank", R.drawable.man_6);
+    private static final Friend user12 = new Friend("Fran Franklin", "@fran", R.drawable.w_6);
+    private static final Friend user13 = new Friend("Gary Gilbert", "@gary", R.drawable.man_7);
+    private static final Friend user14 = new Friend("Giovanna Giles", "@giovanna", R.drawable.w_7);
+    private static final Friend user15 = new Friend("Henry Henderson", "@henry", R.drawable.man_8);
+    private static final Friend user16 = new Friend("Helen Hopwell", "@helen", R.drawable.w_8);
+    private static final Friend user17 = new Friend("Igor Isaacson", "@igor", R.drawable.man_9);
+    private static final Friend user18 = new Friend("Isabel Isaacson", "@isabel", R.drawable.w_9);
+    private static final Friend user19 = new Friend("Justin Jones", "@justin", R.drawable.man_10);
+    private static final Friend user20 = new Friend("Jill Johnson", "@jill", R.drawable.w_10);
+    private static final Friend user21 = new Friend("John Brown", "@john", R.drawable.man_11);
 
     private static final String post1 = "I am studying, but rather not.";
     private static final String post2 = "I you're doing nothing, stop by";

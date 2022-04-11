@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/custom_marker_view"
     android:layout_width="52dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:elevation="5dp">
 
     <RelativeLayout
-        android:layout_width="50dp"
-        android:layout_height="59dp"
-        android:backgroundTint="@color/blue_medium"
-        android:background="@drawable/ic_marker_shape">
+        android:layout_width="48dp"
+        android:layout_height="78.2dp"
+        android:backgroundTint="#86ac66"
+        android:background="@drawable/ic_new_map_pin">
         <TextView android:text="janet John"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +32,7 @@
         app:civ_border_color="#fff"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="4dp"
+        android:layout_marginLeft="3dp"
         android:contentDescription="@null"
         android:src="@drawable/generatedperson" />
 </RelativeLayout>
