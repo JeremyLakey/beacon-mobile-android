@@ -28,6 +28,8 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -70,6 +72,7 @@ public class MapFragment extends Fragment {
 
     ImageView radarPulse;
     SeekBar distance;
+    Button button;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,20 +88,23 @@ public class MapFragment extends Fragment {
         radarPulse = view.findViewById(R.id.radarSweeper);
         distance = view.findViewById(R.id.distance);
         rotate(radarPulse, getActivity().getApplicationContext());
+        radarPulse.setVisibility(View.INVISIBLE);
+        button = view.findViewById(R.id.create_beacon_button);
 
         DataCache dataCache = DataCache.getInstance();
         User user = dataCache.getUser();
         LatLng currLocation = new LatLng(dataCache.locationData.getLatitude(), dataCache.locationData.getLongitude());
 
 
-        this.currentBeaconFragment = new CurrentBeaconFragment();
-
         //Async map
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity().getApplicationContext(), R.raw.style_json));
-
+                googleMap.getUiSettings().setScrollGesturesEnabled(false);
+                googleMap.getUiSettings().setRotateGesturesEnabled(false);
+                googleMap.getUiSettings().setZoomControlsEnabled(false);
+                googleMap.getUiSettings().setZoomGesturesEnabled(false);
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                         currLocation, ((distance.getProgress()/10)+10)
                 ));
@@ -150,18 +156,24 @@ public class MapFragment extends Fragment {
                     beacon.setMarkerId(marker.getId());
                 }
 
+
                 googleMap.setOnMarkerClickListener(
                         new GoogleMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(@NonNull Marker marker) {
                                 Beacon target = getBeaconFromMarker(marker);
                                 if (target == null) {
-                                    return false;
+                                    return true;
                                 }
                                 DataCache.getInstance().currentBeacon = target;
                                 FragmentManager manager = getActivity().getSupportFragmentManager();
-                                manager.beginTransaction().replace(R.id.navBar_current_beacon_container, currentBeaconFragment).commit();
-                                return false;
+                                if (currentBeaconFragment != null) {
+                                    manager.beginTransaction().remove(currentBeaconFragment).commit();
+                                }
+                                currentBeaconFragment = new CurrentBeaconFragment();
+                                manager.beginTransaction().add(R.id.navBar_current_beacon_container, currentBeaconFragment)
+                                        .commit();
+                                return true;    // true means the camera doesn't move. Which is what we always want.
                             }
                         }
                 );
@@ -191,6 +203,15 @@ public class MapFragment extends Fragment {
                         //Add marker on Map
                     }
                 });*/
+                });
+                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+
+                        radarPulse.setVisibility(View.VISIBLE);
+                        rotate(radarPulse, getActivity().getApplicationContext());
+                    }
+                });
             }
         });
 

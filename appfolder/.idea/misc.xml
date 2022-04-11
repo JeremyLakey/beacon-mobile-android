@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/avd_anim.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_outline_svgrepo_com.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_circle_thin.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/drawable/ic_person_background.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_create_beacon.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/custom_marker_layout.xml" value="0.536" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_map.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_nav_bar.xml" value="0.16" />
         <entry key="..\:/Users/Jerem/Desktop/School/UX proj/beacon-mobile-android/appfolder/app/src/main/res/layout/fragment_radar.xml" value="0.1" />

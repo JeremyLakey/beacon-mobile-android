@@ -1,5 +1,8 @@
 package com.models;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.util.DistanceCalculator;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Calendar;
@@ -7,6 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Beacon implements Serializable {
+    public static float maxRange = 1000000.0f; // in meters
     public float longitude;
     public float latitude;
     public String title;
@@ -105,5 +109,23 @@ public class Beacon implements Serializable {
 
     public void setMarkerId(String markerId) {
         this.markerId = markerId;
+    }
+
+    public boolean validateBeacon() {
+        try {
+            if (DataCache.getInstance().locationData == null)
+                return true;
+            LatLng start = new LatLng(DataCache.getInstance().locationData.latitude, DataCache.getInstance().locationData.longitude);
+            LatLng end = new LatLng(latitude, longitude);
+            if (maxRange < DistanceCalculator.distance(start, end)) {
+                return false;
+            }
+            if (!stillTime()) {
+                return false;
+            }
+        } catch (Exception err) {
+            return true;
+        }
+        return true;
     }
 }
