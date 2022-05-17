@@ -25,4 +25,6 @@
     <color name="blue_dark">#1B263B</color>
     <color name="blue_darker">#4e6d70</color>
     <color name="gray_medium">#E0E1DD</color>
+    <color name="loading">#86ac66</color>
+    <color name="pulse">#86ac66</color>
 </resources>

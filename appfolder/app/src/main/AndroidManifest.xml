@@ -17,13 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Appfolder">
         <activity
+            android:name="com.activities.BroadCasting"
+            android:exported="true"
+            android:parentActivityName="com.activities.CreateBeacon">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.activities.MainActivity" />
+        </activity>
+        <activity
             android:name="com.activities.CreateBeacon"
-            android:parentActivityName="com.activities.MainActivity"
-            android:exported="false" >
+            android:exported="false"
+            android:parentActivityName="com.activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.activities.MainActivity" />
-
         </activity>
 
         <meta-data
@@ -32,16 +39,13 @@
 
         <activity
             android:name="com.activities.MainActivity"
-            android:exported="true"
-            >
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

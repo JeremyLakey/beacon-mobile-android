@@ -31,7 +31,14 @@
             android:elevation="1dp"
             android:alpha=".5"/>
 
+        <ImageView
+            android:id="@+id/loading"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_gravity="center_vertical |center_horizontal"/>
+
         <TextView
+            android:id="@+id/distance_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical |center_horizontal"

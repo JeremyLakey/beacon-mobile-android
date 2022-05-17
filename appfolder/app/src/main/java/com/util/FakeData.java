@@ -162,7 +162,10 @@ public class FakeData {
     }
 
     public long getRandomTime() {
-        return ((long)(random.nextFloat() * 100)) * 1000 + 10000;
+        if(random.nextInt(3) > 1) {
+            return ((long)(random.nextFloat() * 100)) * 60000;
+        }
+        return ((long)(random.nextFloat() * 10)) * 1000 + 20000;
     }
 
 

@@ -15,6 +15,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,9 @@ import com.models.Beacon;
 import com.models.DataCache;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     Marker currentLocationMarker;
     Button createBeaconButton;
     Fragment fragment;
+    Vector<Marker> markerSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         DataCache.getInstance();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
         catch (Exception err) {
             System.out.println("Error but we cool\n");
@@ -83,12 +88,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 .commit();
 
 
-        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        //final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
         //final Button button = findViewById(R.id.btn_test);
 
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        this.markerSet = new Vector<>();
 
         //Create Beacon Code
         createBeaconButton = findViewById(R.id.create_beacon_button);
@@ -100,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
     }
+
+
     // TODO: move this to the map Fragment. Because design principles
     @Override
     public void onLocationChanged(Location location) {
@@ -144,11 +153,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         googleMap.clear();
         List<Beacon> beaconList = DataCache.getInstance().getBeaconList();
         for (Beacon beacon: beaconList) {
-            if(!beacon.validateBeacon())
+            if(!beacon.validateBeacon()) {
                 continue;
-            Marker marker = googleMap.addMarker(beaconToMarkerOptions(beacon).icon(BitmapDescriptorFactory.fromBitmap(
-                    createCustomMarker(this, beacon.owner.getImageUrl(),"Manish"))));
-            beacon.setMarkerId(marker.getId());
+            }
+                Marker marker = googleMap.addMarker(beaconToMarkerOptions(beacon).icon(BitmapDescriptorFactory.fromBitmap(
+                        createCustomMarker(this, beacon.owner.getImageUrl(),"Manish"))));
+                markerSet.add(marker);
+                beacon.setMarkerId(marker.getId());
         }
     }
 

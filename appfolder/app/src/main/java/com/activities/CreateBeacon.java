@@ -89,13 +89,13 @@ public class CreateBeacon extends AppCompatActivity implements TimePickerDialog.
 
 
     public void createBeacon() {
-        DataCache cache = DataCache.getInstance();
-        Beacon createBeacon = new Beacon(cache.locationData.latitude,
-                cache.locationData.longitude, beaconDesc.getText().toString(), "I want pie",
-                cache.friendList.get(0), endTime);
-        cache.beaconList.add(createBeacon);
-        Intent i=new Intent(this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+        //DataCache cache = DataCache.getInstance();
+        //Beacon createBeacon = new Beacon(cache.locationData.latitude,
+                //cache.locationData.longitude, cache.friendList.get(0).getUserName(), beaconDesc.getText().toString(),
+                //cache.friendList.get(0), endTime);
+        //cache.beaconList.add(createBeacon);
+        Intent intent = new Intent(this, BroadCasting.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

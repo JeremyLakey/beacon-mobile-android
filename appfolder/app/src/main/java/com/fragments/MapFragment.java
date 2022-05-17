@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -59,6 +61,8 @@ import com.models.DataCache;
 
 import java.nio.channels.DatagramChannel;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,8 +75,12 @@ public class MapFragment extends Fragment {
     protected CurrentBeaconFragment currentBeaconFragment;
 
     ImageView radarPulse;
+    ImageView loading;
+    TextView distanceText;
     SeekBar distance;
-    Button button;
+    Timer timer;
+    AnimatedVectorDrawable loadingAnimation;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,14 +95,32 @@ public class MapFragment extends Fragment {
 
         radarPulse = view.findViewById(R.id.radarSweeper);
         distance = view.findViewById(R.id.distance);
-        rotate(radarPulse, getActivity().getApplicationContext());
+        distanceText = view.findViewById(R.id.distance_text);
         radarPulse.setVisibility(View.INVISIBLE);
-        button = view.findViewById(R.id.create_beacon_button);
+        distance.setVisibility(View.INVISIBLE);
+        distanceText.setAlpha(0);
+        Button button = (Button) getActivity().findViewById(R.id.create_beacon_button);
+        button.setVisibility(View.INVISIBLE);
+
+        loading = view.findViewById(R.id.loading);
+        loading.setBackgroundResource(R.drawable.loading);
+        loadingAnimation = (AnimatedVectorDrawable) loading.getBackground();
+        loadingAnimation.start();
 
         DataCache dataCache = DataCache.getInstance();
         User user = dataCache.getUser();
         LatLng currLocation = new LatLng(dataCache.locationData.getLatitude(), dataCache.locationData.getLongitude());
 
+        timer = new Timer();
+        // Set the schedule function
+        timer.scheduleAtFixedRate(new TimerTask() {
+                                      @Override
+                                      public void run() {
+                                          // Magic here
+                                          loadingAnimation.start();
+                                      }
+                                  },
+                0, 3500);
 
         //Async map
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -105,14 +131,7 @@ public class MapFragment extends Fragment {
                 googleMap.getUiSettings().setRotateGesturesEnabled(false);
                 googleMap.getUiSettings().setZoomControlsEnabled(false);
                 googleMap.getUiSettings().setZoomGesturesEnabled(false);
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        currLocation, ((distance.getProgress()/10)+10)
-                ));
 
-
-                /*googleMap.addMarker(new MarkerOptions().position(currLocation).
-                        icon(BitmapDescriptorFactory.fromBitmap(
-                                createCustomMarker(getActivity(), R.drawable.generatedperson,"Manish")))).setTitle("I'm at the Marb for 30 minutes!");*/
 
                 if (dataCache.getCurrUserBeacon() != null) {
                     googleMap.addMarker(beaconToMarkerOptions(dataCache.getCurrUserBeacon()).icon(BitmapDescriptorFactory.fromBitmap(
@@ -136,10 +155,6 @@ public class MapFragment extends Fragment {
                     }
                 });
 
-
-                /*MarkerOptions imageMarker = new MarkerOptions();
-                imageMarker.position(currLocation);
-                googleMap.addMarker(imageMarker);*/
 
 
                 googleMap.getUiSettings().setScrollGesturesEnabled(false);
@@ -179,8 +194,13 @@ public class MapFragment extends Fragment {
                 googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override
                     public void onMapLoaded() {
-
+                        timer.cancel();
+                        loading.setVisibility(View.INVISIBLE);
                         radarPulse.setVisibility(View.VISIBLE);
+                        distance.setVisibility(View.VISIBLE);
+                        distanceText.setAlpha(1.0f);
+                        Button button = (Button) getActivity().findViewById(R.id.create_beacon_button);
+                        button.setVisibility(View.VISIBLE);
                         rotate(radarPulse, getActivity().getApplicationContext());
                     }
                 });
